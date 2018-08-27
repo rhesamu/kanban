@@ -1,37 +1,37 @@
 <template>
-  <div class="container">
-  <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <router-link :to="'/'" class="navbar-brand">Kanban</router-link>
-        </div>
-     </div>
-    </nav>
+<section class="addkanban">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <router-link to="/" class="navbar-brand">Kanban?</router-link>
+    <div class="collapse navbar-collapse">
+      <div class="ml-auto">
+        <router-link class="btn btn-primary" to="/add">Add Task</router-link>
+      </div>
+    </div>
+  </nav>
 
-   <div class="row" id="main-row">
-     <div class="col-md-12">
-       <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Todo</h3>
-          </div>
-          <div class="panel-body">
-            <div class="panel panel-default">
-              <h4 id="warning-msg" v-if="msg">{{msg}}</h4>
-              <div class="panel-heading">
-                <input type="text" class="form-control" v-model="newTask.title" placeholder="Title">
-              </div>
-              <div class="panel-body" id="bodycontent">
-                <textarea class="form-control" rows="3" v-model="newTask.content" placeholder="Content"></textarea>
-              </div>
+  <div class="container">
+    <div class="row" id="main-row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Add Task</h5>
+            <div class="form-group">
+              <input v-model="newTask.title" type="text" class="form-control" placeholder="Title">
             </div>
-            <button class="btn btn-info" @click="submit">Create</button>
-            <router-link :to="'/'" class="btn btn-primary" id="btn-back">Back</router-link>
+            <div class="form-group">
+              <textarea v-model="newTask.content" rows="3" class="form-control" placeholder="Content">
+              </textarea>
+            </div>
+            <div v-if="msg" class="form-group">
+              <small style="color: red">{{ msg }}</small>
+            </div>
+            <button @click="submit" class="btn btn-primary">Add</button>
           </div>
         </div>
       </div>
-     </div>
-     
-   </div>
+    </div>
+  </div>
+</section>
 </template>
 
 <script>
@@ -49,7 +49,7 @@ export default {
   methods: {
     submit () {
       if (this.newTask.title == null || this.newTask.title === '' || this.newTask.content == null || this.newTask.content === '') {
-        this.msg = 'You must insert title and content';
+        this.msg = 'Title and content required!';
       } else {
         this.$tasksRef.push(this.newTask);
         this.$router.push('/');
@@ -61,15 +61,7 @@ export default {
 
 <style scoped>
 .container {
-  width: 70%;
-}
-#bodycontent {
-  margin-bottom: -8px;
-}
-
-#warning-msg {
-  color:red;
-  margin-top:-5px;
+  width: 50%;
 }
 
 #main-row {
