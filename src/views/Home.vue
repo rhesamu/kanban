@@ -1,14 +1,17 @@
 <template>
   <div class="home">
+    <Navbar />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import Navbar from '@/components/Navbar.vue'
 
 export default {
+  components: {
+    Navbar
+  },
   name: 'home'
 }
 </script>
